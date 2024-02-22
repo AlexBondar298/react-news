@@ -51,15 +51,21 @@ function App() {
         <section className="table">
           <div className="container">
             <div className="table__inner">
-              <h1 className="table-title title">All articles about Tesla from the last month</h1>
-              <ul className="table__list">
-                {nonRepeatingArticles.slice(0, lengthArticles).map((elem, index) => (
-                  <TableCart key={index} author={elem.author} title={elem.title} description={elem.description} urlToImage={elem.urlToImage} />
-                ))}
-              </ul>
-              <div className="addNews">
-                <button onClick={() => setLengthArticles((prev) => prev + 10)}> Add news</button>
-              </div>
+              {isLoading ? (
+                <div className="title"> Loading ...</div>
+              ) : (
+                <>
+                  <h1 className="table-title title">All articles about Tesla from the last month</h1>
+                  <ul className="table__list">
+                    {nonRepeatingArticles.slice(0, lengthArticles).map((elem, index) => (
+                      <TableCart key={index} author={elem.author} title={elem.title} description={elem.description} urlToImage={elem.urlToImage} />
+                    ))}
+                  </ul>
+                  <div className="addNews">
+                    <button onClick={() => setLengthArticles((prev) => prev + 10)}> Add news</button>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </section>
