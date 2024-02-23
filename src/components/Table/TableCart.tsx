@@ -1,48 +1,69 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 interface DataCart {
+  key: number;
+  index: number;
   author: string;
   title: string;
   description: string;
   urlToImage: string;
   pinNewsByTitle: () => void;
+  editNews: (
+    index: number,
+    word: string,
+    editText: string
+  ) => void;
 }
 
-const TableCart = ({ author, title, description, urlToImage, pinNewsByTitle }: DataCart) => {
-  const [editAuthor, setAuthor] = useState<string>(author);
-  const [editTitle, setTitle] = useState<string>(title);
-  const [editDescription, setDescription] = useState<string>(description);
-  const [editUrlToImage, setUrlToImage] = useState<string>(urlToImage);
+const TableCart = ({
+  index,
+  author,
+  title,
+  description,
+  urlToImage,
+  pinNewsByTitle,
+  editNews,
+}: DataCart) => {
+  const [edit, setEdit] = useState<boolean>(false);
 
   const [editWord, setEditWord] = useState<string>("Edit...");
 
-  const [edit, setEdit] = useState<boolean>(false);
-
-  const editNews = (elem: any, arg:string): void => {
+  const f = (arg: string, editText: string): void => {
     setEdit(!edit);
-    setEditWord(elem);
-    if (arg === "editTitle") setTitle(editWord);
-    if (arg === "editDescription") setDescription(editWord);
-    if (arg === "editAuthor") setAuthor(editWord);
-    if (arg === "editUrlToImage") setUrlToImage(editWord);
+    editNews(index, editWord, editText);
+    setEditWord(arg);
   };
 
   return (
     <li className="table__cart">
       <div className="table__cart-item">
-        <h2 className="table__cart-title" onClick={() => editNews(editTitle, "editTitle")}>
-          {editTitle}
+        <h2 className="table__cart-title" onClick={() => f(title, "title")}>
+          {title}
         </h2>
-        <img src={editUrlToImage} alt="image" className="table__cart-img" onClick={() => editNews(editUrlToImage, "editUrlToImage")}/>
-        <p className="table__cart-description" onClick={() => editNews(editDescription, "editDescription")}>{editDescription}</p>
-        <p className="table__cart-author" onClick={() => editNews(editAuthor, "editAuthor")}>
-          Author: <span>{editAuthor}</span>
+        <img
+          src={urlToImage}
+          alt="image"
+          className="table__cart-img"
+          onClick={() => f(urlToImage, "urlToImage")}
+        />
+        <p
+          className="table__cart-description"
+          onClick={() => f(description, "description")}
+        >
+          {" "}
+          {description}
+        </p>
+        <p className="table__cart-author" onClick={() => f(author, "author")}>
+          Author: <span>{author}</span>
         </p>
       </div>
       {edit ? (
         <>
-          <div>
-            <textarea value={editWord} onChange={(event: any) => setEditWord(event.target.value)} />
+          <div className="textarea">
+            <textarea
+              value={editWord}
+              onChange={(event) => setEditWord(event.target.value)}
+            />
           </div>
         </>
       ) : null}
