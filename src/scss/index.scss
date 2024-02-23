@@ -4,13 +4,9 @@
 * {
   box-sizing: border-box;
 }
-a {
-  color: inherit;
-  text-decoration: none;
-}
 
 .body {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Cormorant Garamond", serif;
   background: #fff;
   font-size: 20px;
   font-weight: 300;
@@ -21,16 +17,17 @@ a {
 .container {
   max-width: 1000px;
   margin: 0 auto;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 button {
+  margin-bottom: 50px;
   border: none;
   border: 1px solid rgb(243, 239, 239);
   border-radius: 10px;
   padding: 10px 20px;
   background: rgb(193, 191, 191);
-  width: fit-content;
+  width: 50%;
   margin-left: 30px;
   cursor: pointer;
   &:hover {
@@ -44,11 +41,19 @@ button {
   font-size: 40px;
   font-weight: 400;
   margin-bottom: 30px;
-  // width: 100%;
 }
 
 //*******************************************************
-
+.table__search {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0 10px;
+  margin-bottom: 10px;
+  input {
+    border: 1px solid rgb(243, 239, 239);
+    outline: none;
+  }
+}
 .table__list {
   display: flex;
   justify-content: center;
@@ -59,7 +64,8 @@ button {
 .table__cart {
   display: flex;
   flex-direction: column;
-  flex-basis: 280px;
+  justify-content: space-between;
+  max-width: 280px;
   padding: 10px;
   border: 1px solid rgb(243, 239, 239);
   border-radius: 20px;
@@ -72,7 +78,8 @@ button {
   font-weight: 700;
 }
 .table__cart-img {
-  max-width: 250px;
+  display: flex;
+  max-width: 260px;
   border-radius: 20px;
   margin-bottom: 10px;
 }
@@ -80,6 +87,7 @@ button {
   font-size: 15px;
   font-weight: 200;
   margin-bottom: 20px;
+  overflow: hidden;
 }
 .table__cart-author {
   text-align: end;
@@ -87,17 +95,29 @@ button {
   font-size: 15px;
   font-weight: 200;
   margin-bottom: 10px;
+  overflow: hidden;
   span {
     font-weight: 700;
     border-bottom: 1px solid grey;
   }
 }
-.addNews {
+.table__cart-pin button {
+  margin: 0 auto;
+  width: 100%;
+}
+.table__addNews {
   margin-top: 20px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
 }
-
+@media (max-width: 991px) {
+  .container {
+    max-width: 950px;
+  }
+  .table__search {
+    justify-content: center;
+  }
+}
 @media (max-width: 650px) {
   .table__list {
     gap: 20px 20px;
@@ -116,7 +136,7 @@ button {
 
 @media (max-width: 576px) {
   .table__cart {
-    flex-basis: 300px;
+    max-width: 490px;
   }
   .table__cart-title {
     font-size: 20px;
